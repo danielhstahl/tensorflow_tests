@@ -79,11 +79,13 @@ for i in range(0, stepsPer(numTrain, arraySize)):
     
 print(totalNum) '''
 
-fitHistory=model.fit_generator( generator=sql_generator_train(), steps_per_epoch=10, validation_data=sql_generator_test(), validation_steps=20, epochs=10)
+fitHistory=model.fit_generator( generator=sql_generator_train(), steps_per_epoch=10, validation_data=sql_generator_test(), validation_steps=20, epochs=9)
 
-print(model.predict([5000, .1, 10000, .2]))
+print(model.predict(np.array([[5000, .1, 10000, .2]])))
+print(model.predict(np.array([[5000, .1, 10000, .8]])))
+print(model.predict(np.array([[5000, .15, 50000, .2]])))
 #evaluation=model.evaluate_generator(generator=sql_generator_test(), steps=stepsPer(numTest, arraySize))
 
-conn.close()
+#conn.close()
 
 #print(evaluation)
