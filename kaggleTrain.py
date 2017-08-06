@@ -79,8 +79,14 @@ for i in range(0, stepsPer(numTrain, arraySize)):
     
 print(totalNum) '''
 
-fitHistory=model.fit_generator( generator=sql_generator_train(), steps_per_epoch=10, validation_data=sql_generator_test(), validation_steps=20, epochs=9)
 
+##One epoch is a single pass over all the data...
+# though in this case I think its over 1/10 of the data
+## step per epoch means how many times the optimization is run 
+## in this case, the optimization is run 10 times for each "epoch"
+## there are 9 epochs, for 90 total optimization iterations
+fitHistory=model.fit_generator( generator=sql_generator_train(), steps_per_epoch=10, validation_data=sql_generator_test(), validation_steps=20, epochs=9)
+ 
 print(model.predict(np.array([[5000, .1, 10000, .2]])))
 print(model.predict(np.array([[5000, .1, 10000, .8]])))
 print(model.predict(np.array([[5000, .15, 50000, .2]])))
