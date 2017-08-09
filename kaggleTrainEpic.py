@@ -75,7 +75,7 @@ def create_sql_test(colname, numSample):
 
 
 
-batchSize=200
+batchSize=1000
 numTrain=100000
 numTest=200000
 
@@ -109,7 +109,8 @@ def sql_generator_test(sampleSize, batchSize):
 ##One epoch is a single pass over all the data...
 ## step per epoch means how many times the optimization is run 
 ## in this case, the optimization is run 100 times (once over each batch of 1000 samples)
-fitHistory=model.fit_generator(generator=sql_generator_train(batchSize), steps_per_epoch=stepsPer(numTrain, batchSize), validation_data=sql_generator_test(numTest, batchSize), validation_steps=stepsPer(numTest, batchSize), epochs=10)
+
+fitHistory=model.fit_generator( generator=sql_generator_train(batchSize), steps_per_epoch=10, validation_data=sql_generator_test(numTest, batchSize), validation_steps=20, epochs=9)
 print(model.predict(np.array([[5000, .1, 10000, .2]])))
 print(model.predict(np.array([[5000, .1, 10000, .8]])))
 print(model.predict(np.array([[5000, .15, 50000, .2]])))
